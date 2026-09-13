@@ -31,18 +31,20 @@ export function PublicFooter() {
   ];
 
   return (
-    <footer className="border-t bg-muted/40">
+    <footer className="border-t-4 border-foreground bg-card">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">
           <div>
-            <p className="text-lg font-bold">BidVerse</p>
+            <p className="font-mono-tag text-lg font-bold">BidVerse</p>
             <p className="mt-2 text-sm text-muted-foreground">
-              India's trustworthy online forward auction platform.
+              India&apos;s trustworthy online forward auction platform.
             </p>
           </div>
           {links.map((group) => (
             <div key={group.title}>
-              <p className="font-semibold">{group.title}</p>
+              <p className="font-mono-tag text-xs font-bold tracking-widest text-secondary uppercase">
+                {group.title}
+              </p>
               <ul className="mt-3 space-y-2">
                 {group.items.map((item) => (
                   <li key={item.href}>
@@ -58,7 +60,7 @@ export function PublicFooter() {
             </div>
           ))}
         </div>
-        <div className="mt-8 border-t pt-6 text-center text-sm text-muted-foreground">
+        <div className="mt-8 border-t-2 border-border pt-6 text-center text-sm text-muted-foreground">
           © {new Date().getFullYear()} BidVerse. All rights reserved.
         </div>
       </div>

@@ -28,7 +28,7 @@ export function AuctionCard({ auction }: { auction: AuctionCardData }) {
 
   return (
     <Link href={`/auctions/${auction._id}`} className="block">
-      <Card className="group h-full overflow-hidden transition-all hover:shadow-lg">
+      <Card className="group h-full overflow-hidden border-2 border-foreground bg-card transition-all hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-neo-lg">
         <div className="relative h-44 w-full bg-muted">
           {image ? (
             // eslint-disable-next-line @next/next/no-img-element

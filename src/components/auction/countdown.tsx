@@ -19,7 +19,7 @@ export function CountdownTimer({ endDate }: { endDate: string | Date }) {
 
   if (ended) {
     return (
-      <span className="inline-flex items-center rounded-full bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-600">
+      <span className="inline-flex items-center bg-muted px-2 py-0.5 text-xs font-medium text-muted-foreground">
         Ended
       </span>
     );
@@ -31,7 +31,7 @@ export function CountdownTimer({ endDate }: { endDate: string | Date }) {
   const secs = seconds % 60;
 
   return (
-    <span className="inline-flex items-center gap-1 rounded-full bg-red-50 px-2 py-0.5 text-xs font-semibold text-red-600">
+    <span className="font-mono-tag inline-flex items-center gap-1 bg-red-500 px-2 py-0.5 text-xs font-semibold text-white">
       {hours > 0 && `${hours}h `}
       {minutes}m {secs}s left
     </span>

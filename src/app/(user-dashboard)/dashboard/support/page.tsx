@@ -44,10 +44,10 @@ interface TicketsResponse {
 }
 
 const statusColor: Record<string, string> = {
-  open: "bg-green-100 text-green-800 border-green-200",
-  in_progress: "bg-blue-50 text-blue-700 border-blue-200",
-  resolved: "bg-green-50 text-green-700 border-green-200",
-  closed: "bg-gray-100 text-gray-700 border-gray-200",
+  open: "bg-green-100 text-green-800",
+  in_progress: "bg-blue-100 text-blue-800",
+  resolved: "bg-teal-100 text-teal-800",
+  closed: "bg-muted text-muted-foreground",
 };
 
 const emptyForm = {
@@ -187,7 +187,7 @@ export default function SupportPage() {
                 <CardTitle className="flex items-center justify-between">
                   <span className="truncate">{ticket.subject}</span>
                   <Badge
-                    className={statusColor[ticket.status] || "bg-gray-100 text-gray-700 border-gray-200"}
+                    className={statusColor[ticket.status] || "bg-muted text-muted-foreground"}
                   >
                     {ticket.status.replace("_", " ")}
                   </Badge>
