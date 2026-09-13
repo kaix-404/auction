@@ -5,13 +5,17 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "node server.js",
     "lint": "eslint",
     "dev:server": "node server.js",
+    "worker:all": "tsx workers/index.ts",
     "worker:auction": "tsx workers/auction-closer.worker.ts",
     "worker:notification": "tsx workers/notification.worker.ts",
     "worker:refund": "tsx workers/refund.worker.ts",
     "worker:reconciliation": "tsx workers/reconciliation.worker.ts"
+  },
+  "engines": {
+    "node": ">=20"
   },
   "dependencies": {
     "@auth/mongodb-adapter": "^3.11.3",

@@ -4,14 +4,16 @@ const Redis = require("ioredis");
 const next = require("next");
 
 const dev = process.env.NODE_ENV !== "production";
+const PORT = Number(process.env.PORT) || 3000;
+const HOSTNAME = process.env.HOSTNAME || "0.0.0.0";
+
 const app = next({
   dev,
-  hostname: process.env.HOSTNAME || "localhost",
-  port: Number(process.env.PORT) || 3000,
+  hostname: HOSTNAME,
+  port: PORT,
 });
 const handler = app.getRequestHandler();
 
-const SOCKET_PORT = Number(process.env.SOCKET_PORT || 3005);
 const REDIS_URL = process.env.REDIS_URL || "redis://localhost:6379";
 
 app.prepare().then(() => {
@@ -56,7 +58,10 @@ app.prepare().then(() => {
     }
   });
 
-  httpServer.listen(SOCKET_PORT, () => {
-    console.log(`> Socket.io ready on port ${SOCKET_PORT}`);
+  httpServer.listen(PORT, () => {
+    console.log(`> Auction server ready on http://${HOSTNAME}:${PORT}`);
+    if (process.env.RAILWAY_PUBLIC_DOMAIN) {
+      console.log(`  Public URL: https://${process.env.RAILWAY_PUBLIC_DOMAIN}`);
+    }
   });
 });
