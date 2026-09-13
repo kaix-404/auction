@@ -1,0 +1,45 @@
+services:
+  - type: web
+    name: auction-web
+    runtime: node
+    plan: free
+    buildCommand: npm run build
+    startCommand: node server.js
+    healthCheckPath: /
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        sync: false
+      - key: REDIS_URL
+        sync: false
+      - key: NEXTAUTH_SECRET
+        generateValue: true
+      - key: JWT_SECRET
+        generateValue: true
+      - key: NEXTAUTH_URL
+        sync: false
+      - key: NEXT_PUBLIC_APP_URL
+        sync: false
+      - key: NEXT_PUBLIC_SOCKET_URL
+        sync: false
+      - key: SOCKET_URL
+        sync: false
+
+  - type: worker
+    name: auction-workers
+    runtime: node
+    plan: free
+    buildCommand: npm run build
+    startCommand: node node_modules/tsx/dist/cli.mjs workers/index.ts
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        sync: false
+      - key: REDIS_URL
+        sync: false
+      - key: NEXTAUTH_SECRET
+        generateValue: true
+      - key: JWT_SECRET
+        generateValue: true
