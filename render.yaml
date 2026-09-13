@@ -3,6 +3,7 @@ services:
     name: auction-web
     runtime: node
     plan: free
+    installCommand: npm ci
     buildCommand: npm run build
     startCommand: node server.js
     healthCheckPath: /
@@ -30,6 +31,7 @@ services:
     name: auction-workers
     runtime: node
     plan: free
+    installCommand: npm ci
     buildCommand: npm run build
     startCommand: node node_modules/tsx/dist/cli.mjs workers/index.ts
     envVars:
