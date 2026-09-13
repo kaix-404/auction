@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { toast } from "sonner";
+import { useAuth } from "@/components/auth-provider";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -17,6 +18,7 @@ import {
 
 export default function RegisterPage() {
   const router = useRouter();
+  const { refresh } = useAuth();
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({
     fullName: "",
@@ -72,8 +74,26 @@ export default function RegisterPage() {
         toast.error(data.error || "Verification failed");
         return;
       }
-      toast.success("Account verified! Please login");
-      router.push("/login");
+
+      const loginRes = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          identifier: form.email,
+          password: form.password,
+        }),
+      });
+      const loginData = await loginRes.json();
+      if (!loginRes.ok) {
+        toast.error(loginData.error || "Auto-login failed. Please log in manually.");
+        router.push("/login");
+        return;
+      }
+
+      await refresh();
+      toast.success("Account verified! Welcome to BidVerse");
+      router.push("/dashboard");
+      router.refresh();
     } catch {
       toast.error("Something went wrong");
     } finally {
