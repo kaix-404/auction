@@ -1,10 +1,8 @@
 services:
   - type: web
     name: auction-web
-    runtime: node
+    runtime: docker
     plan: free
-    installCommand: npm ci
-    buildCommand: npm run build
     startCommand: node server.js
     healthCheckPath: /
     envVars:
@@ -29,10 +27,8 @@ services:
 
   - type: worker
     name: auction-workers
-    runtime: node
+    runtime: docker
     plan: free
-    installCommand: npm ci
-    buildCommand: npm run build
     startCommand: node node_modules/tsx/dist/cli.mjs workers/index.ts
     envVars:
       - key: NODE_ENV

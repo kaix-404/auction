@@ -1,0 +1,12 @@
+node_modules
+.next
+.git
+.env
+server-logs.*.txt
+tests
+worker-out.txt
+worker-err.txt
+Dockerfile
+render.yaml
+railway.json
+*.md
